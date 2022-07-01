@@ -1,0 +1,13 @@
+<h1>LOGIN</h1>
+
+{% if messages %}
+    {% for message in messages %}
+        <div class="alert {% if message.tags %}alert-{{ message.tags }}{% endif %}" role="alert">{{ message }}
+        </div>
+    {% endfor %}
+{% endif %}
+
+<form method="post">{% csrf_token %}
+    {{form.as_p}}
+    <button type="submit">Entrar</button>
+</form>
