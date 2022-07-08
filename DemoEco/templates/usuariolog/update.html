@@ -1,0 +1,48 @@
+{% extends "base.html" %}
+
+{% load  static %}
+
+{% block title %}
+  Ecos publicas
+{% endblock title %}
+
+{% block content %}
+
+<form class="form-registro" method="post">{% csrf_token %}
+    <h3>Editor de datos</h3>
+    <div class="grid-container">
+      <div class="grid-x grid-padding-x">
+        <div class="medium-6 cell">
+          <label>Nombre completo:
+            {{form.paciente}}
+          </label>
+        </div>
+        <div class="medium-4 cell">
+            <label>Id del paciente:
+              {{form.idP}}
+            </label>
+        </div>
+        <div class="medium-12 cell">
+            <label>Descripción corta:
+              {{form.descripcion_corta}}
+            </label>
+        </div>
+        <div class="medium-5 cell">
+            <legend>Ecografia registrada</legend>
+              {{form.archivo}}
+          </div>
+        <fieldset class="medium-5 cell">
+            <legend>¿Quieres que todos puedan ver esta ecografia?</legend>
+            {{form.publico}}<label for="checkbox2">Publico</label>
+        </fieldset>
+          <div class="medium-10 cell">
+            <label>Descripción:
+              {{form.descripcion}}
+            </label>
+          </div>
+          <button class="button primary centro" type="submit">Guardar</button>
+      </div>
+    </div>
+  </form>
+
+{% endblock content %}

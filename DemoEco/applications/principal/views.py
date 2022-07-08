@@ -2,8 +2,8 @@
 from django.shortcuts import render
 from django.http import HttpResponseRedirect
 from django.contrib import messages
-from django.contrib.auth import authenticate, login
-from django.views.generic import TemplateView, FormView
+from django.contrib.auth import authenticate, login, logout 
+from django.views.generic import TemplateView, FormView, View
 
 from .models import User 
 from .forms import RegisterForm, LoginForm
@@ -28,7 +28,7 @@ class UserRegisterView(FormView):
             nombres=form.cleaned_data['nombres'],
             apellidos=form.cleaned_data['apellidos'],
             )
-        messages.success(self.request, "Registro exitoso")
+        messages.success(self.request, "Usuario registrado con exito")
         return HttpResponseRedirect(reverse('principal_app:login'))
     
     
@@ -47,4 +47,8 @@ class LoginUserView(FormView):
         login(self.request, user)
         return super(LoginUserView,self).form_valid(form)
         
+class LogoutView(View):
+    def get(self, request, *args,**kwargs):
+        logout(request)
+        return HttpResponseRedirect(reverse('principal_app:inicio'))
     

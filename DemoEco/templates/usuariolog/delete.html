@@ -1,0 +1,17 @@
+{% extends "base.html" %}
+
+{% load  static %}
+
+{% block title %}
+  Ecos publicas
+{% endblock title %}
+
+{% block content %}
+
+<form method="post">{% csrf_token %}
+    <p>¿Estas seguro de eliminar la ecografia del paciente {{ object.paciente }}?</p>
+    {{ form }}
+    <input class="alert button" type="submit" value="Confirmar">
+</form>
+
+{% endblock content %}

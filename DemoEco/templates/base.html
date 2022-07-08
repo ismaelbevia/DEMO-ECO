@@ -1,0 +1,26 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <link rel="stylesheet" href="{% static 'css/app.css' %}">
+  <link rel="stylesheet" href="{% static 'css/eco.css' %}">
+  {% block css %}{% endblock css %}
+  <title>{% block title %}{% endblock title %}</title>
+
+</head>
+<body>
+
+  <div id="cuerpo">
+    {% include "includes/header.html" %}
+    {% block content %}
+    {% endblock content %}  
+  </div>
+  
+  {% include "includes/footer.html" %}
+
+  {% block js %}{% endblock js %}
+  <script src="{% static 'js/app.js' %}"></script>
+</body>
+
+</html>

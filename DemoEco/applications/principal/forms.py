@@ -37,7 +37,9 @@ class LoginForm(forms.Form):
 
     password = forms.CharField(
         label='Contraseña',
-        required=True
+        required=True,
+        widget=forms.PasswordInput(),
+        
     )
 
     def clean(self):  

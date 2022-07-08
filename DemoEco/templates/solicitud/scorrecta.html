@@ -1,0 +1,18 @@
+{% extends "base.html" %}
+
+{% load  static %}
+
+{% block title %}
+  Ecos publicas
+{% endblock title %}
+
+{% block content %}
+
+<div id="gracias" class="callout">
+    <h5>GRACIAS POR SU CONFIANZA</h5>
+    <p>Pronto contactaremos con usted.</p>
+    <p>Por favor continue explorando en las funciones de nuestra aplicación:</p>
+    <a href="{% url 'principal_app:inicio' %}">Pagina de inicio</a>
+  </div>
+
+{% endblock content %}

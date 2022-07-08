@@ -1,1 +1,67 @@
-<h1>Bienvenido {{user}}<h1>
+{% extends "base.html" %}
+
+{% load  static %}
+
+{% block title %}
+  Ecos publicas
+{% endblock title %}
+
+{% block content %}
+
+<h1 id="tituloL">Ecografias públicas</h1>
+
+<div>
+  <table>
+      <thead>
+        <tr>
+          <th>Fecha</th>
+          <th>Usuario</th>
+          <th>Paciente</th>
+          <th>Identificador del paciente</th>
+          <th>Descripción</th>
+          <th>Ver</th>
+        </tr>
+      </thead>      
+      <tbody>
+      {% for eco in ecos%}
+      <tr>
+          <td>{{eco.fecha| date:"Y-m-d H:i"}}</td>
+          <td>{{eco.usuario}}</td>
+          <td>{{eco.paciente}}</td>
+          <td>{{eco.idP}}</td>
+          <td>{{eco.descripcion_corta}}</td>
+          <td>&nbsp;<a class="SDetalle" href="{% url 'usuariolog_app:vista' eco.id %}"> &raquo; </a></td>
+      </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+</div>
+
+<div class="cell">
+  {% if is_paginated %}
+  <nav aria-label="Pagination">
+      <ul class="pagination text-center">                        
+          {% if page_obj.has_previous %}
+          <li class="pagination-previous"><a href="?page={{page_obj.previous_page_number}}">Atras</a></li>
+          {% endif %}
+          
+          {% for pagina in paginator.page_range %}
+              {% if pagina == page_obj.number %}
+              <li class="current"><span class="show-for-sr">You're on page</span>{{pagina}}</li>
+              {% else %}
+              <li><a href="?page={{pagina}}">{{ pagina }}</a></li>
+              {% endif %}
+          {% endfor %}
+          
+          {% if page_obj.has_next %}
+          <li class="pagination-next"><a href="?page={{page_obj.next_page_number}}">Siguiente</a></li>
+          {% endif %}
+      </ul>
+  </nav>
+  {% endif %}
+</div>
+
+<div class="csv"><p><a class="button secondary" href="{% url 'usuariolog_app:descargar-lista' 1%}">Descargar lista en csv</a></p>
+</div>
+
+{% endblock content %}

@@ -1,0 +1,25 @@
+{% extends "base.html" %}
+
+{% load  static %}
+
+{% block title %}
+  Ecografia {{eco.id}}
+{% endblock title %}
+
+{% block content %}
+
+<div class="callout alert info">
+    <p>Fecha del registro: {{eco.fecha}}</p>
+    <p>Registrada por el usuario: {{eco.usuario}}</p>
+    <p>Paciente: {{eco.paciente}}</p>
+    <p>Identficador del paciente: {{eco.idP}}</p>
+    <p>{{eco.descripcion_corta}}</p>
+</div>
+
+<img class="imagen" src="{{eco.archivo.url}}">
+
+<div id="desc" class="callout large">
+  <p>{{eco.descripcion}}</p>
+</div>
+
+{% endblock content %}

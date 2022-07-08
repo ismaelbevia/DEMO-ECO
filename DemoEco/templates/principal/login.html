@@ -1,13 +1,36 @@
-<h1>LOGIN</h1>
+{% extends "base.html" %}
 
-{% if messages %}
-    {% for message in messages %}
-        <div class="alert {% if message.tags %}alert-{{ message.tags }}{% endif %}" role="alert">{{ message }}
+{% load  static %}
+
+{% block title %}
+  LOGIN
+{% endblock title %}
+
+{% block content %}
+
+
+  {% if messages %}
+  <div class="callout success mensaje" data-closable>
+  {% for message in messages %}
+    <h5>{{message}}</h5>
+  {% endfor %}
+    <button class="close-button" aria-label="Dismiss alert" type="button" data-close><span aria-hidden="true">&times;</span></button>
+    </div>
+  {% endif %}
+  
+    <form class="log-in-form" method="post">{% csrf_token %}
+      <h4 id="titleS" class="text-center">Inicia sesión en DEMO ECO</h4>
+      <br>
+        {% if form.errors %}
+        <div class="callout warning">
+        <p>Correo o contraseña invalidos</p>
         </div>
-    {% endfor %}
-{% endif %}
+        {% endif %}
+        <label class="labelT">Usuario:{{form.username}}</label>
+        <label class="labelT">Contraseña:{{form.password}}</label>
+        <p><button class="button primary" type="submit">Entrar</button></p>
+        <p class="text-center"><a href="{% url 'principal_app:user-registro' %}">Nuevo usuario</a></p>
+    </form>
 
-<form method="post">{% csrf_token %}
-    {{form.as_p}}
-    <button type="submit">Entrar</button>
-</form>
+
+{% endblock content %}

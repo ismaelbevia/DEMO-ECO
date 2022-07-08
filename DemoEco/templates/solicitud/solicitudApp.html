@@ -1,0 +1,45 @@
+{% extends "base.html" %}
+
+{% load  static %}
+
+{% block title %}
+  Ecos publicas
+{% endblock title %}
+
+{% block content %}
+<form class="form-registro" method="post">{% csrf_token %}
+    <h3>FORMULARIO DE CONTACTO PARA SOLICITAR LA APPLICACIÓN</h3>
+    <br>
+
+    <div class="grid-container">
+      <div class="grid-x grid-padding-x">
+        <div class="medium-6 cell">
+          <label>Nombre completo:
+            {{form.full_name}}
+          </label>
+        </div>
+        <div class="medium-4 cell">
+            <label>Telefono movil:
+              {{form.movil}}
+            </label>
+        </div>
+        <div class="medium-6 cell">
+            <label>Correo electrónico:
+              {{form.email}}
+            </label>
+          </div>
+          <div class="medium-6 cell">
+            <label>Empresa:
+              {{form.empresa}}
+            </label>
+          </div>
+          <div class="medium-12 cell">
+            <label>Solicitud:
+              {{form.cuerpo}}
+            </label>
+          </div>
+          <button class="button primary centro" type="submit">Solicitar aplicación</button>
+      </div>
+    </div>
+  </form>
+{% endblock content %}

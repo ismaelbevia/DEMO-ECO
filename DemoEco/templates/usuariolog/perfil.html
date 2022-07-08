@@ -1,0 +1,86 @@
+{% extends "base.html" %}
+
+{% load  static %}
+
+{% block title %}
+  Ecos publicas
+{% endblock title %}
+
+{% block content %}
+
+<h1 id="tituloL">Ecografias administradas por el usuario: {{user}}</h1>
+
+<table>
+    <thead>
+      <tr>
+        <th>Fecha</th>
+        <th>Paciente</th>
+        <th>Identificador del paciente</th>
+        <th>Descripción</th>
+        <th>Publico</th>
+        <th>Editar</th>
+        <th>Ver</th>
+        <th>Eliminar</th>
+
+      </tr>
+    </thead>      
+    <tbody>
+    {% for eco in ecos%}
+    <tr>
+        <td>{{eco.fecha| date:"Y-m-d H:i"}}</td>
+        <td>{{eco.paciente}}</td>
+        <td>{{eco.idP}}</td>
+        <td>{{eco.descripcion_corta}}</td>
+        {% if eco.publico is True%}
+        <td>Si</td>
+        {% else %}
+        <td>No</td>
+        {% endif %}
+        <td><a href="{% url 'usuariolog_app:update' eco.id %}">Editar</a></td>
+        <td>&nbsp;<a class="SDetalle" href="{% url 'usuariolog_app:vista' eco.id %}">&raquo;</a></td>
+        <td>&nbsp;&nbsp;&nbsp;&nbsp;<a data-open="Mensajedelete" class="SDetalle">&#10007;</a></td>
+
+        <div class="reveal" id="Mensajedelete" data-reveal>
+          <form method="post" action="{% url 'usuariolog_app:delete' eco.id %}">{% csrf_token %}
+            <p>¿Estas seguro de eliminar la ecografia?</p>
+            {{ form }}
+            <input class="alert button" type="submit" value="Confirmar">
+          </form>
+          <button class="close-button" data-close aria-label="Close modal" type="button">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+
+    </tr>
+    {% endfor %}
+    </tbody>
+</table>
+
+<div class="cell">
+  {% if is_paginated %}
+  <nav aria-label="Pagination">
+      <ul class="pagination text-center">                        
+          {% if page_obj.has_previous %}
+          <li class="pagination-previous"><a href="?page={{page_obj.previous_page_number}}">Atras</a></li>
+          {% endif %}
+          
+          {% for pagina in paginator.page_range %}
+              {% if pagina == page_obj.number %}
+              <li class="current"><span class="show-for-sr">You're on page</span>{{pagina}}</li>
+              {% else %}
+              <li><a href="?page={{pagina}}">{{ pagina }}</a></li>
+              {% endif %}
+          {% endfor %}
+          
+          {% if page_obj.has_next %}
+          <li class="pagination-next"><a href="?page={{page_obj.next_page_number}}">Siguiente</a></li>
+          {% endif %}
+      </ul>
+  </nav>
+  {% endif %}
+</div>
+
+<div class="csv"><p><a class="button secondary" href="">Añadir ecografia</a></p>
+<div class="csv"><p><a class="button secondary" href="{% url 'usuariolog_app:descargar-lista' 2%}">Descargar lista en csv</a></p>
+
+{% endblock content %}

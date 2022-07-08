@@ -1,1 +1,19 @@
-<h1>INICIO</h1>
+{% extends "base.html" %}
+
+{% load  static %}
+
+{% block title %}
+  DEMO ECO
+{% endblock title %}
+
+{% block content %}
+  <img id="imgECO" src="{% static 'img/eco.jpg' %}">
+
+  <div class="callout large" id="textIni">
+    <h5>This is a secondary callout</h5>
+    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus dapibus sapien lorem, suscipit tempor ipsum facilisis eu. Aenean dapibus vulputate neque, ac venenatis est bibendum sit amet. Nam ullamcorper ex diam. Praesent non libero sed quam iaculis condimentum. Ut at dignissim eros. Phasellus molestie rhoncus vestibulum. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos.</p>
+    <p>Vestibulum ac ullamcorper sem. Morbi nec ex quis nulla vulputate fermentum eu in sem. Duis sit amet lacinia elit. Suspendisse pretium, diam quis placerat rhoncus, eros dolor congue dui, luctus mollis nisi nisl at risus. Aliquam nec diam non enim fringilla interdum sed eu lorem. Morbi porta ex in sollicitudin egestas. Duis a lectus quis neque mollis pretium vitae id augue. Suspendisse mattis est ut leo aliquam vehicula. Donec et leo ipsum. </p>
+  </div>
+
+
+{% endblock content %}

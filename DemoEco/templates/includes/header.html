@@ -1,0 +1,24 @@
+<header>
+    <div class="top-bar">
+        <div class="top-bar-left menu">
+          <ul class="menu">
+            <li class="rosa"><a id="titulo" href="{% url 'principal_app:inicio' %}">DEMO ECO</a></li>
+          </ul>
+        </div>
+        <div class="top-bar-right">
+          <ul class="menu campos">
+            <li class="rosa"><a href="{% url 'solicitud_app:solicitud' %}">Solicitar la aplicación</a></li>
+            {% if not user.is_anonymous %}<!-- SI no es un usuario anonimo -->
+                <li class="rosa"><a href="{% url 'usuariolog_app:lista' %}">Ecos publicadas</a></li>
+                <li class="rosa"><a href="{% url 'usuariolog_app:perfil' %}">Administrar</a></li>
+                <li class="rosa"><a href="{% url 'principal_app:user-logout' %}">Cerrar sesión</a></li>
+      
+            {% else %}
+                <li class="rosa"><a href="{% url 'principal_app:login' %}">Login</a></li>
+                <li class="rosa">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</li>
+            {% endif %}
+          </ul>
+        </div>
+      </div>
+
+</header>
